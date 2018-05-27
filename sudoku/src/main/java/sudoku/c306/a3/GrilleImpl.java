@@ -110,13 +110,71 @@ public class GrilleImpl extends Grille {
         return true;
     }
 
+    /**
+	 * Méthode SiPossible.
+	 * @param value caractère.
+	 * @return true ou false.
+	 */
+	private boolean siPossible(final char value) {
+        int i = 0;
+        while (i < grille.length) {
+            if (possible[i] == value) {
+                return true;
+            }
+            i++;
+        }
+        return false;
+    }
+    
     /* (non-Javadoc)
      * @see sudoku.Grille#possible(int, int, char)
      */
-    @Override
-    public boolean possibleValues(final int x, final int y, final char value) {
-        // TODO Auto-generated method stub
-        return true;
-    }
+    /**
+	 * Méthode possible.
+	 * @param x entier.
+	 * @param y entier.
+	 * @param value caractère.
+	 * @return false ou true.
+	 */
+	@Override
+	public boolean possibleValues(final int x, final int y, final char value)
+			throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		 if (x < 0 || y < 0 || x >= grille.length || y >= grille.length) {
+	            throw new IllegalArgumentException("index hors"
+	            		+ " des bornes");
+	        }
+			if (!siPossible(value)) {
+         throw new IllegalArgumentException("value caractere non autorisé");
+     }
+
+	        //Recherche d'une occurence du caractère dans la ligne
+	        for (int col = 0; col < grille.length; col++) {
+	            if (grille[x][col] == value) {
+	                return false;
+	            }
+	        }
+
+	        //Recherche d'une occurence du caractère dans la colone
+	        for (int row = 0; row < grille.length; row++) {
+	            if (grille[row][y] == value) {
+	                return false;
+	            }
+	        }
+
+	        //Recherche d'une occurence du caractère
+	        int taillePetitCarre = (int) Math.sqrt(grille.length);
+	        int incX = (x / taillePetitCarre) * taillePetitCarre;
+	        int incY = (y / taillePetitCarre) * taillePetitCarre;
+	        for (int row = 0; row < taillePetitCarre; row++) {
+	            for (int col = 0; col < taillePetitCarre; col++) {
+	                if (grille[row + incX][col + incY] == value) {
+	                    return false;
+	                }
+	            }
+	        }
+	        return true;
+	}
+    
 
 }
