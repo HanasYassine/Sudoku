@@ -3,6 +3,7 @@ package com.act.hns;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
+import com.act.hns.GrilleImpl;
 
 /**
  * Test unitaire pour la classe GrilleImpl. Ma classe GrilleImpl.
@@ -128,7 +129,7 @@ public class GrilleTest extends TestCase {
 	}
 
 	/**
-	 * Test de la methode testGetDimension() .
+	 * Test method for {@link com.act.hns.GrilleImpl#getDimension()}.
 	 */
 	public void testGetDimension() {
 		GrilleImpl grille = new GrilleImpl(9);
@@ -138,7 +139,8 @@ public class GrilleTest extends TestCase {
 	}
 
 	/**
-	 * Test de la method testSetValue().
+	 * Test method for
+	 * {@link com.act.hns.GrilleImpl#setValue(int, int, char)}.
 	 */
 	public void testSetValue() {
 		int x = 5;
@@ -161,7 +163,7 @@ public class GrilleTest extends TestCase {
 	}
 
 	/**
-	 * Test de la m�thode testGetValue().
+	 * Test method for {@link com.act.hns.GrilleImpl#getValue(int, int)}.
 	 */
 	public void testGetValue() {
 		GrilleImpl grille = new GrilleImpl(9);
@@ -188,7 +190,7 @@ public class GrilleTest extends TestCase {
 	}
 
 	/**
-	 * Test de la methode testComplete().
+	 * Test method for {@link com.act.hns.GrilleImpl#complete()}.
 	 */
 	public void testComplete() {
 		GrilleImpl instance = new GrilleImpl(9);
@@ -204,7 +206,8 @@ public class GrilleTest extends TestCase {
 	}
 
 	/**
-	 * Test of method testPossible().
+	 * Test method for
+	 * {@link com.act.hns.GrilleImpl#possible(int, int, char)}.
 	 */
 	public void testPossible() {
 		int x = 0;
@@ -213,27 +216,27 @@ public class GrilleTest extends TestCase {
 		GrilleImpl grille = new GrilleImpl(9);
 		grille.setValue(0, 0, '1');
 		boolean val = false;
-		boolean resultat = grille.possible(x, y, value);
+		boolean resultat = grille.possibleValues(x, y, value);
 		Assert.assertEquals(val, resultat);
 
 		// Au cas o� l'indices est incorrects
 		try {
-			grille.possible(-1, y, value);
+			grille.possibleValues(-1, y, value);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 		}
 		try {
-			grille.possible(0, -1, value);
+			grille.possibleValues(0, -1, value);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 		}
 		try {
-			grille.possible(19, 0, value);
+			grille.possibleValues(19, 0, value);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 		}
 		try {
-			grille.possible(0, 19, value);
+			grille.possibleValues(0, 19, value);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 		}
@@ -248,21 +251,21 @@ public class GrilleTest extends TestCase {
 		grille = new GrilleImpl(9);
 		initSudoku(grille);
 		val = false;
-		resultat = grille.possible(1, 0, '5');
+		resultat = grille.possibleValues(1, 0, '5');
 		Assert.assertEquals(val, resultat);
 
 		// Valeur existant en colone
 		grille = new GrilleImpl(9);
 		grille.setValue(1, 1, '1');
 		val = false;
-		resultat = grille.possible(0, 1, '1');
+		resultat = grille.possibleValues(0, 1, '1');
 		Assert.assertEquals(val, resultat);
 
 		// Valeur existant dans le carr� local
 		grille = new GrilleImpl(9);
 		grille.setValue(1, 1, '1');
 		val = false;
-		resultat = grille.possible(0, 0, '1');
+		resultat = grille.possibleValues(0, 0, '1');
 		Assert.assertEquals(val, resultat);
 	}
 }

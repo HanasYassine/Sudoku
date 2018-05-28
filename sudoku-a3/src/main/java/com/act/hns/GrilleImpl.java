@@ -5,9 +5,9 @@ package com.act.hns;
  * 
  * @author yassinehanas@gmail.com (Hanas Yassine).
  */
-public class GrilleImpl implements Grille {
+public class GrilleImpl extends Grille {
 	/**
-	 * Variable grille caract�re.
+	 * Variable grille caractere.
 	 */
 	private char[][] grille;
 
@@ -27,10 +27,10 @@ public class GrilleImpl implements Grille {
 	}
 
 	/**
-	 * M�thode qui retourne la taille de l a grille.
+	 * Mehode qui retourne la taille de la grille.
 	 */
+	@Override
 	public int getDimension() {
-		// TODO Auto-generated method stub
 		return grille.length;
 	}
 
@@ -44,8 +44,9 @@ public class GrilleImpl implements Grille {
 	 * @param value
 	 *            chaine de caract�re.
 	 */
-	public void setValue(final int x, final int y, final char value) throws IllegalArgumentException {
-		if (!possible(x, y, value)) {
+	@Override
+	public void setValue(final int x, final int y, final char value) {
+		if (!possibleValues(x, y, value)) {
 			throw new IllegalArgumentException("la valeur est interdite aux " + "vues des autres valeurs de la grille");
 		}
 		grille[x][y] = value;
@@ -60,8 +61,8 @@ public class GrilleImpl implements Grille {
 	 *            entier.
 	 * @return grille[x][y].
 	 */
-	public char getValue(final int x, final int y) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+	@Override
+	public char getValue(final int x, final int y) {
 		if (x < 0 || y < 0 || x >= grille.length || y >= grille.length) {
 			throw new IllegalArgumentException("Les valeurs" + " ne correspond pas ");
 		}
@@ -73,8 +74,8 @@ public class GrilleImpl implements Grille {
 	 * 
 	 * @return true ou false.
 	 */
+	@Override
 	public boolean complete() {
-		// TODO Auto-generated method stub
 		for (int i = 0; i < grille.length; i++) {
 			for (int j = 0; j < grille.length; j++) {
 				if (grille[i][j] == EMPTY) {
@@ -86,7 +87,7 @@ public class GrilleImpl implements Grille {
 	}
 
 	/**
-	 * M�thode SiPossible.
+	 * Methode SiPossible.
 	 * 
 	 * @param value
 	 *            caract�re.
@@ -104,7 +105,7 @@ public class GrilleImpl implements Grille {
 	}
 
 	/**
-	 * M�thode possible.
+	 * Methode possible.
 	 * 
 	 * @param x
 	 *            entier.
@@ -114,8 +115,8 @@ public class GrilleImpl implements Grille {
 	 *            caract�re.
 	 * @return false ou true.
 	 */
-	public boolean possible(final int x, final int y, final char value) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+	@Override
+	public boolean possibleValues(final int x, final int y, final char value) {
 		if (x < 0 || y < 0 || x >= grille.length || y >= grille.length) {
 			throw new IllegalArgumentException("index hors" + " des bornes");
 		}
